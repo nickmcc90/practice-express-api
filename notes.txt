@@ -1,1 +1,12 @@
 Practice api notes and tricks.
+
+npm init -y
+npm install express
+npm install cors
+npm install --save-dev nodemon
+
+create express configs in server
+
+app.get('/', (req, res) => {
+  res.sendFile(__dirname, + './index.html')
+})

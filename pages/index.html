@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Big server</title>
+  </head>
+  <body>
+    <div style="display: flex; justify-content: center;">
+      <div style="display: flex; flex-direction: column; gap: 30px; align-items: center;">
+        <h1>API call interactivity practice!</h1>
+        <div style="display: flex; flex-direction: column; gap: 100px; align-items: center;">
+          <div style="display: flex; justify-content: space-between; gap: 150px;">
+            <h3>GET requests</h3>
+            <div style="display: flex; gap: 10px; justify-content: space-between; width: 1000px; align-items: center;">
+              <button class="text">Get text</button>
+              <div style="display: flex; flex-direction: column; gap: 40px;">
+                <select name="numbers" id="numbers">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+                <button class="number">Get number</button>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 40px;">
+                <input 
+                  type="text" id='jam' placeholder="write a type of jelly..." 
+                 />
+                <button class="jelly">Get jelly</button>
+              </div>
+              <button class="key">Get key: value</button>
+            </div>
+          </div>
+          <div style="display: flex; justify-content: space-between; gap: 150px;">
+            <h3>POST request</h3>
+            <div style="display: flex; flex-direction: column; gap: 20px; align-items: center;">
+              <button class="juice-button">Add melonjuice to this list</button>
+              <div class="insert-juice"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+
+      const text = document.querySelector('.text')
+      const number = document.querySelector('.number')
+      const jelly = document.querySelector('.jelly')
+      const key = document.querySelector('.key')
+
+      async function getText () {
+        const res = await fetch('/cheese')
+        const data = await res.json()
+
+        text.innerHTML = data.message
+
+        setTimeout(() => {
+          text.innerHTML = "Get text"
+        }, 2000)
+
+        console.log(data.message)
+      }
+
+      text.addEventListener('click', () => {
+        getText()
+      })
+
+      ///
+
+      async function getNumber() {
+        const selectValue = document.getElementById('numbers').value
+        const res = await fetch(`/anything/${selectValue}`)
+        const data = await res.json()
+
+        number.innerHTML = data.message
+
+        setTimeout(() => {
+          number.innerHTML = "Get number"
+        }, 2000)
+
+        console.log(data.message)
+      }
+
+      number.addEventListener('click', () => {
+        getNumber();
+      })
+
+      ///
+
+      async function getJelly() {
+        const theJelly = document.getElementById('jam').value
+        const res = await fetch(`/turkey/?jelly=${theJelly}`)
+        const data = await res.json()
+
+        jelly.innerHTML = data.message
+        
+        setTimeout(() => {
+          jelly.innerHTML = "Get jelly"
+        }, 2000)
+
+        console.log(data.message)
+      }
+
+      jelly.addEventListener('click', () => {
+        getJelly()
+      })
+
+      ///
+
+      async function getKey() {
+        const res = await fetch('/keyvalue?key=money&value=millions')
+        const data = await res.json()
+
+        key.innerHTML = Object.keys(data.message)[0] + ": " + data.message.money
+
+        setTimeout(() => {
+          key.innerHTML = 'Get key: value'
+        }, 2000)
+
+
+        console.log(data.message.money)
+      }
+
+      key.addEventListener('click', () => {
+        getKey();
+      })
+
+      //
+
+      const juiceButton = document.querySelector('.juice-button')
+
+      const juiceSpace = document.querySelector('.insert-juice')
+
+      async function addJuice() {
+        const res = await fetch('/postit/8?type=number', {
+          method: 'POST',
+          headers: {
+            'Content-type': "application/json"
+          },
+          body: JSON.stringify({ "item": "lemonjuice" })
+        })
+
+        const data = await res.json()
+
+        juiceSpace.innerHTML = data.database.join(" ")
+
+        console.log(data)
+      }
+
+      juiceButton.addEventListener('click', () => {
+        addJuice()
+      })
+
+    </script>
+  </body>
+</html>
