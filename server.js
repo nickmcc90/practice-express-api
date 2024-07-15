@@ -1,30 +1,33 @@
 const express = require("express")
 const app = express()
-const PORT = 443
+const PORT = 3007
 app.use(express.json())
+
+
+const DOMAIN = `http:localhost:${PORT}/`
 
 
 const getArray = ["hello", "sure", "gotme"]
 
-app.get('https://practiceapi602.netlify.app/', (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile(__dirname + '/pages' + '/index.html')
 })
 
-app.get('https://practiceapi602.netlify.app/cheese', (req, res) => {
+app.get('/cheese', (req, res) => {
   res.status(200).json({ message: getArray[0]})
 })
 
-app.get('https://practiceapi602.netlify.app/anything/:number', (req, res) => {
+app.get('/anything/:number', (req, res) => {
   const { number } = req.params
   res.status(200).json({ message: "Congrats, here's " + number})
 })
 
-app.get('https://practiceapi602.netlify.app/turkey', (req, res) => {
+app.get('/turkey', (req, res) => {
   const { jelly } = req.query
   res.status(200).json({ message: "here's the type of jelly: " + jelly})
 })
 
-app.get('https://practiceapi602.netlify.app/keyvalue', (req, res) => {
+app.get('/keyvalue', (req, res) => {
   const { key, value } = req.query
   res.status(200).json({ message: {
     [key]: value
@@ -33,7 +36,7 @@ app.get('https://practiceapi602.netlify.app/keyvalue', (req, res) => {
 
 //
 
-app.post('https://practiceapi602.netlify.app/postit/:value', (req, res) => {
+app.post('/postit/:value', (req, res) => {
   const { item } = req.body
   const { value } = req.params
   const { type } = req.query
