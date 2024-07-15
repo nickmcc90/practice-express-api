@@ -6,12 +6,11 @@ app.use(express.json())
 
 const DOMAIN = `http:localhost:${PORT}/`
 
+app.use(express.static("public"))
+
 
 const getArray = ["hello", "sure", "gotme"]
 
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/pages' + '/index.html')
-})
 
 app.get('/cheese', (req, res) => {
   res.status(200).json({ message: getArray[0]})
