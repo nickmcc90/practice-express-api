@@ -6,8 +6,6 @@ app.use(express.json())
 
 const DOMAIN = `http:localhost:${PORT}/`
 
-app.use(express.static("public"))
-
 
 const getArray = ["hello", "sure", "gotme"]
 
