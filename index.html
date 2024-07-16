@@ -49,7 +49,7 @@
       const key = document.querySelector('.key')
 
       async function getText () {
-        const res = await fetch('http://127.0.0.1/cheese')
+        const res = await fetch('https://127.0.0.1/cheese')
         const data = await res.json()
 
         text.innerHTML = data.message
@@ -69,7 +69,7 @@
 
       async function getNumber() {
         const selectValue = document.getElementById('numbers').value
-        const res = await fetch(`http://127.0.0.1/anything/${selectValue}`)
+        const res = await fetch(`https://127.0.0.1/anything/${selectValue}`)
         const data = await res.json()
 
         number.innerHTML = data.message
@@ -89,7 +89,7 @@
 
       async function getJelly() {
         const theJelly = document.getElementById('jam').value
-        const res = await fetch(`http://127.0.0.1/turkey/?jelly=${theJelly}`)
+        const res = await fetch(`https://127.0.0.1/turkey/?jelly=${theJelly}`)
         const data = await res.json()
 
         jelly.innerHTML = data.message
@@ -108,7 +108,7 @@
       ///
 
       async function getKey() {
-        const res = await fetch('http://127.0.0.1/keyvalue?key=money&value=millions')
+        const res = await fetch('https://127.0.0.1/keyvalue?key=money&value=millions')
         const data = await res.json()
 
         key.innerHTML = Object.keys(data.message)[0] + ": " + data.message.money
@@ -132,7 +132,7 @@
       const juiceSpace = document.querySelector('.insert-juice')
 
       async function addJuice() {
-        const res = await fetch('http://127.0.0.1/postit/8?type=number', {
+        const res = await fetch('https://127.0.0.1/postit/8?type=number', {
           method: 'POST',
           headers: {
             'Content-type': "application/json"
