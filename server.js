@@ -1,6 +1,6 @@
 const express = require("express")
 const app = express()
-const PORT = 3007
+const PORT = `127.0.0.1`
 app.use(express.json())
 
 
@@ -58,4 +58,6 @@ app.post('/postit/:value', (req, res) => {
 
 
 
-app.listen()
+app.listen(PORT, () => {
+  console.log(PORT)
+})
